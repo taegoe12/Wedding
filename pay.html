@@ -4,40 +4,29 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gifts for Tierra &amp; Montaegoe</title>
-  <meta name="description" content="Choose Cash App or Zelle to send a gift." />
+  <meta name="description" content="Choose Cash App, Venmo, or Apple Cash to send a gift." />
   <style>
     :root{
       --bg:#f6f7fb; --fg:#0f172a; --muted:#475569; --brand:#111827; --accent:#06b6d4;
-      --btn:#111827; --btnText:#ffffff; --card:#ffffff; --border:#e5e7eb; --ok:#16a34a;
+      --btn:#111827; --btnText:#ffffff; --card:#ffffff; --border:#e5e7eb;
     }
     *{box-sizing:border-box}
     body{margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
       Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:var(--bg); color:var(--fg);}
-    .wrap{max-width:720px; margin:0 auto; padding:24px;}
+    .wrap{max-width:820px; margin:0 auto; padding:24px;}
     header{display:flex; align-items:center; gap:12px; margin:16px 0 8px;}
     header .logo{font-size:30px}
     h1{font-size:28px; margin:0;}
     p{color:var(--muted); line-height:1.5}
     .grid{display:grid; grid-template-columns:1fr; gap:16px; margin-top:16px}
-    @media (min-width:560px){ .grid{ grid-template-columns:1fr 1fr; } }
-    .btn, .card{border-radius:16px; border:1px solid var(--border); background:var(--card);}
-    .btn{display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700;
-         padding:18px 16px; font-size:18px; background:var(--btn); color:var(--btnText); box-shadow:0 6px 20px rgba(0,0,0,.08)}
+    @media (min-width:780px){ .grid{ grid-template-columns:1fr 1fr 1fr; } }
+    .btn{border-radius:16px; border:1px solid var(--border); background:var(--btn); color:var(--btnText);
+         display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:700;
+         padding:18px 16px; font-size:18px; box-shadow:0 6px 20px rgba(0,0,0,.08)}
     .btn:hover{filter:brightness(1.03)}
     .btn:active{transform:translateY(1px)}
     .btn .emoji{font-size:22px}
-    .card{padding:18px}
-    .card h2{margin:0 0 6px; font-size:20px}
-    .row{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:8px 0}
-    code.tag{background:#0ea5e9; color:white; padding:2px 8px; border-radius:999px; font-weight:700}
-    small.note{display:block; color:var(--muted); margin-top:6px}
-    .copybar{display:flex; gap:8px; flex-wrap:wrap}
-    .copybar .copy{flex:1; min-width:180px; display:flex; align-items:center; gap:8px; border:1px dashed var(--border);
-                   border-radius:12px; padding:10px 12px; background:white}
-    .copybar button{border:none; background:var(--accent); color:white; padding:10px 12px; border-radius:10px; font-weight:700; cursor:pointer}
-    .copybar button:active{transform:translateY(1px)}
     footer{margin-top:24px; text-align:center; color:var(--muted); font-size:14px}
-    .success{display:none; color:var(--ok); font-weight:700; margin-top:8px}
   </style>
 </head>
 <body>
@@ -46,54 +35,56 @@
       <div class="logo">💌</div>
       <div>
         <h1>Gifts for Tierra &amp; Montaegoe</h1>
-        <p>Thanks for celebrating with us! Choose your preferred way to send a contribution.</p>
+        <p>Thank you for celebrating with us! Pick what works best for you.</p>
       </div>
     </header>
 
     <div class="grid">
       <!-- Cash App -->
       <a class="btn" id="cashBtn" href="https://cash.app/$tierraN" target="_blank" rel="noopener">
-        <span class="emoji">💚</span> Open Cash App
+        <span class="emoji">💚</span> Cash App
       </a>
 
-      <!-- Zelle -->
-      <div class="card">
-        <h2>Send with Zelle®</h2>
-        <p>Use your banking app and send to:</p>
-        <div class="copybar">
-          <div class="copy"><span>📧</span><span id="zelleEmail">—</span><button onclick="copyText('zelleEmail')">Copy</button></div>
-          <div class="copy"><span>📱</span><span id="zellePhone">(734) 560-8525</span><button onclick="copyText('zellePhone')">Copy</button></div>
-        </div>
-        <small class="note">Tip: Many bank apps also let you show your own Zelle QR. You can replace this section with your personal Zelle QR image later.</small>
-        <div id="copied" class="success">Copied!</div>
-      </div>
+      <!-- Venmo (app-first with web fallback) -->
+      <a class="btn" id="venmoBtn" href="https://venmo.com/u/Tierra-Nelson-9" target="_blank" rel="noopener">
+        <span class="emoji">🔵</span> Venmo
+      </a>
+
+      <!-- Apple Cash (opens Messages thread) -->
+      <a class="btn" id="appleCashBtn" href="sms:+17345608525?&body=Hi%20Tierra%20%26%20Montaegoe%20%E2%80%94%20sending%20a%20gift%20via%20Apple%20Cash%20🎁" >
+        <span class="emoji">🍎</span> Apple Cash (iPhone)
+      </a>
     </div>
 
     <footer>
-      <small>Customize this page by editing <code>pay.html</code>: replace <code>$tierraN</code>, <code>—</code>,
-        and <code>(734) 560-8525</code> with your details.</small>
+      <small>
+        Tip: If Venmo doesn’t open the app on mobile, it will fall back to the web profile automatically.
+      </small>
     </footer>
   </div>
 
   <script>
-    function copyText(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      const txt = el.textContent.trim();
-      if(navigator.clipboard && window.isSecureContext){
-        navigator.clipboard.writeText(txt).then(()=> showCopied(), ()=> fallbackCopy(txt));
-      }else{
-        fallbackCopy(txt);
-      }
-    }
-    function fallbackCopy(text){
-      const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
-      ta.select(); try{ document.execCommand('copy'); }catch(e){ } document.body.removeChild(ta); showCopied();
-    }
-    function showCopied(){
-      const m=document.getElementById('copied'); if(!m) return;
-      m.style.display='block'; setTimeout(()=>{m.style.display='none'}, 1200);
-    }
+    // Venmo: try app deep link on mobile, else fall back to web profile.
+    (function() {
+      const btn = document.getElementById('venmoBtn');
+      if (!btn) return;
+      const venmoUser = 'Tierra-Nelson-9';  // no '@'
+      const deep = `venmo://paycharge?txn=pay&recipients=${encodeURIComponent(venmoUser)}`;
+      const web = btn.getAttribute('href');
+
+      btn.addEventListener('click', function(e) {
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (!isMobile) return; // desktop: keep web
+        e.preventDefault();
+        const start = Date.now();
+        // Try app
+        window.location = deep;
+        // Fallback to web if app doesn't open quickly
+        setTimeout(function() {
+          if (Date.now() - start < 1500) { window.location = web; }
+        }, 800);
+      });
+    })();
   </script>
 </body>
 </html>
