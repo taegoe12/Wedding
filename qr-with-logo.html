@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding QR with Logo (Knockout)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Arial; padding: 24px; }
+    #qr { margin: 12px 0; }
+    button { padding: 10px 14px; border: 0; border-radius: 10px; font-weight: 700; cursor: pointer; }
+  </style>
+  <!-- Library -->
+  <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+</head>
+<body>
+  <h1>Wedding QR with Center Logo</h1>
+
+  <div id="qr"></div>
+  <button id="dl">Download PNG</button>
+
+  <script>
+    const qr = new QRCodeStyling({
+      width: 1024,            // print quality
+      height: 1024,
+      type: "svg",            // svg = infinitely sharp; changes to "canvas" if you prefer
+      data: "https://taegoe12.github.io/Wedding/",
+      image: "https://taegoe12.github.io/Wedding/logo.png",
+      qrOptions: { errorCorrectionLevel: "H" }, // more redundancy for center logo
+      imageOptions: {
+        hideBackgroundDots: true, // << clears dots behind the logo
+        imageSize: 0.22,          // 0.18–0.28 works well; reduce if scans are finicky
+        margin: 8,                // extra white pad around the logo
+        crossOrigin: "anonymous"
+      },
+      dotsOptions: { type: "square", color: "#000000" },
+      backgroundOptions: { color: "#ffffff" }
+    });
+
+    qr.append(document.getElementById("qr"));
+    document.getElementById("dl").addEventListener("click", () => {
+      qr.download({ name: "wedding-qr", extension: "png" });
+    });
+  </script>
+</body>
+</html>
